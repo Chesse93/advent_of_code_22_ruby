@@ -24,8 +24,6 @@ def dir_tree(file)
         end
     end
 
-    pp dir_sizes
-
     dir_sizes
 end
 
@@ -35,5 +33,8 @@ tree = dir_tree(file)
 available_space = TOTAL - tree[""]
 space_to_clean = NEEDED - available_space
 
+# Get the sum of values under MAX_SIZE
 puts tree.inject(0) { |sum, (_, v)| v < MAX_SIZE ? v + sum : sum }
+
+# Get the nearest greater Value to space_to_clean
 puts tree.min_by { |_, v| v > space_to_clean ? (space_to_clean-v).abs : FIXNUM_MAX }[1]
