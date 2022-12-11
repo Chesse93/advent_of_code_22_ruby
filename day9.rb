@@ -63,10 +63,25 @@ def count_tails_visited_positions(tail_length = 1)
         # puts "Move: #{line}, Head: #{head}, Tail: #{tail}"
     end
 
-    visited.length
+    visited
+end
+
+def plot(array, filename)
+    svg = <<ENDSVG
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -400 500 500">
+#{array.map{ |point| "<circle cx='#{point[:x]}' cy='#{point[:y]}' r='1' />" }.join("\n")}
+</svg>
+ENDSVG
+
+    file_name = "#{__dir__}/plot/#{filename}.svg"
+    File.open(file_name, 'w') { |file| file.write(svg) }
 end
 
 if __FILE__ == $0
-  puts count_tails_visited_positions
-  puts count_tails_visited_positions(9)
+    day_9_1 = count_tails_visited_positions
+    day_9_2 = count_tails_visited_positions(9)
+    puts day_9_1.length
+    puts day_9_2.length
+    plot(day_9_1, "day_9_1")
+    plot(day_9_2, "day_9_2")
 end
