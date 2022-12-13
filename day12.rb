@@ -45,6 +45,7 @@ def reset_matrix
     @printed_graph = nil
     @last_visited_x = nil
     @last_visited_y = nil
+    sleep(0.5)
 end
 
 def print_matrix(x, y, mountain_map)
@@ -68,7 +69,7 @@ def print_matrix(x, y, mountain_map)
         puts
     end
     print_black_line(@max_width, @max_char_width)
-    sleep(0.01)
+    sleep(0.05)
 end
 
 def print_black_line(size, char_width)
