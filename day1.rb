@@ -1,22 +1,20 @@
-class Array         
+class Array
   def [](index)
-     self.at(index) ? self.at(index) : 0
+    at(index) || 0
   end
 end
 
 def input
-  @input ||= File.read("input/01.txt").split("\n")
+  @input ||= File.read('input/01.txt').split("\n")
 end
 
 if __FILE__ == $0
   arr = []
   idx = 0
   input.each do |i|
-      if i == ""
-          idx += 1
-      end
+    idx += 1 if i == ''
 
-      arr[idx] += i.to_i
+    arr[idx] += i.to_i
   end
 
   puts arr.max

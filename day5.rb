@@ -1,17 +1,19 @@
 def input
-  @input ||= File.read("input/05.txt").split("\n\n")
+  @input ||= File.read('input/05.txt').split("\n\n")
 end
 
 def initial_stacks
-  @initial_stacks ||= (
-    input.first.
-          split("\n").
-          map(&:chars).
-          transpose.
-          select { |stack| stack.any? { |e| /\d+/.match(e) } }.
-          map { |stack| *contents, number = stack; contents.delete(" "); [number.to_i, contents] }.
-          to_h
-  )
+  @initial_stacks ||= input.first
+                           .split("\n")
+                           .map(&:chars)
+                           .transpose
+                           .select { |stack| stack.any? { |e| /\d+/.match(e) } }
+                           .map do |stack|
+    *contents, number = stack
+    contents.delete(' ')
+    [number.to_i, contents]
+  end
+                           .to_h
 end
 
 def instructions
@@ -38,6 +40,4 @@ def heads_of_stacks(stacks)
   stacks.values.map(&:first).join
 end
 
-if __FILE__ == $0
-  puts heads_of_stacks(rearrange_crates)
-end
+puts heads_of_stacks(rearrange_crates) if __FILE__ == $0
